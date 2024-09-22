@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un detalle para ti</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #e0e0e0;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 1s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .message {
+            font-size: 1.4rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: #ffb86c;
+            font-weight: 600;
+        }
+
+        .subtext {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #a0a0a0;
+        }
+
+        .btn {
+            background-color: #ffb86c;
+            color: #121212;
+            padding: 12px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background-color: #ffa53d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 184, 108, 0.4);
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px;
+            }
+
+            .message {
+                font-size: 1.2rem;
+            }
+
+            .subtext {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="card">
+    <div class="card-content">
+        <p class="message">
+            <span class="highlight">Un pequeño detalle para alegrar tu día, <span id="nombreSpan"></span> ✨</span>
+        </p>
+        <p class="subtext">
+            A veces las cosas simples son las que más nos hacen sonreír. ¿Quieres ver algo bonito?
+        </p>
+        <a href="#" id="siguienteBtn" class="btn">Siguiente</a>
+    </div>
+</div>
+
+<script>
+    function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    window.onload = function () {
+        const allowedNames = ['Nataly', 'Ale','Choco','Tazcon','Mocosa','Evelyn','Emilia','Jonathan'];
+        var nombre = getParameterByName('para');
+
+        if (allowedNames.includes(nombre)) {
+            document.getElementById('nombreSpan').textContent = nombre;
+            document.getElementById('siguienteBtn').href = 'flower.html?para=' + encodeURIComponent(nombre);
+        } else {
+            // Redirigir a la página "notfound.html" si el nombre no está en la lista permitida
+            window.location.href = 'notfound.html';
+        }
+    }
+</script>
+</body>
+
+</html>
